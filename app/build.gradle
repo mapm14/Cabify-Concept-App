@@ -1,10 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "cabify.manuelperera.com.cabifychallenge"
+        applicationId "com.manuelperera.cabifychallenge"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
@@ -19,12 +22,111 @@ android {
     }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+def android(DependencyHandler dependencyHandler) {
+    def android_compile_sdk_version = '26.0.0-alpha1'
+
+    dependencyHandler.add("compile", "com.android.support:appcompat-v7:$android_compile_sdk_version")
+    dependencyHandler.add("compile", "com.android.support:design:$android_compile_sdk_version")
+    dependencyHandler.add("compile", "com.android.support:cardview-v7:$android_compile_sdk_version")
+    dependencyHandler.add("compile", "com.android.support:support-v13:$android_compile_sdk_version")
+    dependencyHandler.add("compile", "com.android.support:cardview-v7:$android_compile_sdk_version")
+    dependencyHandler.add("compile", "com.android.support:recyclerview-v7:$android_compile_sdk_version")
+}
+
+def kotlin(DependencyHandler dependencyHandler) {
+    def anko_version = '0.10.1'
+
+    dependencyHandler.add("compile", "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+    dependencyHandler.add("compile", "org.jetbrains.anko:anko-sdk15:$anko_version")
+    dependencyHandler.add("compile", "org.jetbrains.anko:anko-appcompat-v7:$anko_version")
+}
+
+def dagger(DependencyHandler dependencyHandler) {
+    def dagger_version = '2.12'
+
+    dependencyHandler.add("compile", "com.google.dagger:dagger:$dagger_version")
+    dependencyHandler.add("kapt", "com.google.dagger:dagger-compiler:$dagger_version")
+    dependencyHandler.add("provided", "org.glassfish:javax.annotation:10.0-b28")
+}
+
+def retrofit(DependencyHandler dependencyHandler) {
+    def okhttp_version = '3.9.0'
+    def retrofit_version = '2.3.0'
+
+    dependencyHandler.add("compile", "com.squareup.okhttp3:okhttp:$okhttp_version")
+    dependencyHandler.add("compile", "com.squareup.okhttp3:logging-interceptor:$okhttp_version")
+    dependencyHandler.add("compile", "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version")
+    dependencyHandler.add("compile", "com.squareup.retrofit2:retrofit:$retrofit_version", {
+        exclude module: 'okhttp'
+    })
+    dependencyHandler.add("compile", "com.squareup.retrofit2:converter-gson:$retrofit_version")
+}
+
+def rxKotlin(DependencyHandler dependencyHandler) {
+    def rx_kotlin_version = '2.1.0'
+    def rx_binding2_version = '2.0.0'
+
+    dependencyHandler.add("compile", "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version")
+    dependencyHandler.add("compile", "com.jakewharton.rxbinding2:rxbinding-kotlin:$rx_binding2_version")
+    dependencyHandler.add("compile", "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rx_binding2_version")
+    dependencyHandler.add("compile", "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rx_binding2_version")
+}
+
+def picasso(DependencyHandler dependencyHandler) {
+    def picasso_version = '2.5.2'
+
+    dependencyHandler.add("compile", "com.squareup.picasso:picasso:$picasso_version", {
+        exclude module: 'okhttp'
+    })
+}
+
+def reactivePermissions(DependencyHandler dependencyHandler) {
+    def reactive_permissions_version = '1.0.1'
+
+    dependencyHandler.add("compile", "co.develoop.reactivepermission:reactivepermission-rx2:$reactive_permissions_version")
+}
+
+def androidCleanArchitecture(DependencyHandler dependencyHandler) {
+    def android_clean_architecture_version = '0.0.22'
+
+    dependencyHandler.add("compile", "co.develoop.androidcleanarchitecture:android-clean-architecture:$android_clean_architecture_version")
+}
+
+def toasty(DependencyHandler dependencyHandler) {
+    def toasty_version = '1.2.5'
+
+    dependencyHandler.add("compile", "com.github.GrenderG:Toasty:$toasty_version")
+}
+
+def googlePlayServices(DependencyHandler dependencyHandler) {
+    def google_maps_play_services_version = '11.0.4'
+
+    dependencyHandler.add("compile", "com.google.android.gms:play-services-maps:$google_maps_play_services_version")
+    dependencyHandler.add("compile", "com.google.android.gms:play-services-location:$google_maps_play_services_version")
+}
+
+def testing(DependencyHandler dependencyHandler) {
+    def espresso_core_version = '2.2.2'
+    def junit_version = '4.12'
+
+    dependencyHandler.add("androidTestCompile", "com.android.support.test.espresso:espresso-core:$espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.google.android.gms:play-services-maps:11.0.4'
-    testCompile 'junit:junit:4.12'
+    dependencyHandler.add("testCompile", "junit:junit:$junit_version")
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    android(dependencies)
+    kotlin(dependencies)
+    dagger(dependencies)
+    retrofit(dependencies)
+    rxKotlin(dependencies)
+    picasso(dependencies)
+    reactivePermissions(dependencies)
+    androidCleanArchitecture(dependencies)
+    toasty(dependencies)
+    googlePlayServices(dependencies)
+    testing(dependencies)
 }

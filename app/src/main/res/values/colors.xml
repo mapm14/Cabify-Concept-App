@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#6f42fb</color>
+    <color name="colorPrimaryDark">#422796</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorPrimaryLight">#8b67fb</color>
+
+    <color name="map_search_bar_image">#B9B9B9</color>
+    <color name="map_search_bar_text">#8D8D8D</color>
+
+    <color name="gray">#626262</color>
 </resources>

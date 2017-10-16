@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Cabify Challenge</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Cabify Challenge</string>
+    <string name="map_search_point_a_hint">Buscar punto de partida</string>
+    <string name="map_search_point_b_hint">Buscar punto de llegada</string>
+    <string name="start_point">Punto de partida</string>
+    <string name="end_point">Punto de llegada</string>
+    <string name="calculate_estimates">Calcular estimados</string>
+    <string name="select_two_stops">Por favor seleccione punto de partida y punto de llegada</string>
+    <string name="no_street_address_result">No se han conseguido resultados para su búsqueda</string>
+    <string name="remove_stop">Eliminar parada</string>
+    <string name="question_remove_stop">¿Estás seguro que deseas eliminar esta parada?</string>
+    <string name="network_error">¡Ups! Ha ocurrido un error de conexión</string>
+    <string name="estimates">Estimaciones</string>
+    <string name="retry">Reintentar</string>
 </resources>

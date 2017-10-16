@@ -1,0 +1,43 @@
+package com.manuelperera.cabifychallenge.view.widget
+
+import android.content.Context
+import android.content.res.TypedArray
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ScaleXSpan
+import android.util.AttributeSet
+import android.widget.Button
+import android.widget.TextView
+import com.jakewharton.rxbinding2.view.RxView
+import com.manuelperera.cabifychallenge.R
+import com.manuelperera.cabifychallenge.view.Fonts
+import io.reactivex.Observable
+
+class TypefaceButton : Button {
+
+    constructor(context: Context) : super(context)
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        text?.let {
+            applyStyle(context, attrs)
+        }
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        text?.let {
+            applyStyle(context, attrs)
+        }
+    }
+
+    private fun applyStyle(context: Context, attrs: AttributeSet) {
+        val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.TypefaceButton)
+        applyFont(context, typedArray)
+        typedArray.recycle()
+    }
+
+    private fun applyFont(context: Context, typedArray: TypedArray) {
+        typeface = Fonts.values()[typedArray.getInteger(R.styleable.TypefaceButton_fontName, 3)].getTypeface(context)
+    }
+
+    fun asObservable(): Observable<Any> = RxView.clicks(this)
+}

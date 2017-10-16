@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="map_search_bar_height">40dp</dimen>
+    <dimen name="map_search_bar_margin_width">16dp</dimen>
+    <dimen name="map_search_bar_margin_height">10dp</dimen>
+    <dimen name="google_map_padding">8dp</dimen>
+</resources>
