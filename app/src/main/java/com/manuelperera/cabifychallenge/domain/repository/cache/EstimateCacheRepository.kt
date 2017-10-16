@@ -7,7 +7,7 @@ import com.manuelperera.cabifychallenge.domain.objects.Travel
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-class EstimateCacheRepository<E : Estimate> {
+open class EstimateCacheRepository<E : Estimate> {
 
     private var mEstimatesList: List<E>? = null
     private var mTravel: Travel? = null

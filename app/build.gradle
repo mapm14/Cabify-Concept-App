@@ -108,11 +108,16 @@ def googlePlayServices(DependencyHandler dependencyHandler) {
 def testing(DependencyHandler dependencyHandler) {
     def espresso_core_version = '2.2.2'
     def junit_version = '4.12'
+    def mockito_version = '1.4.0'
 
     dependencyHandler.add("androidTestCompile", "com.android.support.test.espresso:espresso-core:$espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     dependencyHandler.add("testCompile", "junit:junit:$junit_version")
+
+    dependencyHandler.add("testCompile", "com.nhaarman:mockito-kotlin:$mockito_version", {
+        exclude module: 'kotlin-stdlib'
+    })
 }
 
 dependencies {

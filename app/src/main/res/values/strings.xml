@@ -10,7 +10,7 @@
     <string name="no_street_address_result">No se han conseguido resultados para su búsqueda</string>
     <string name="remove_stop">Eliminar parada</string>
     <string name="question_remove_stop">¿Estás seguro que deseas eliminar esta parada?</string>
-    <string name="network_error">¡Ups! Ha ocurrido un error de conexión</string>
+    <string name="calculate_estimates_error">¡Ups! No hemos podido calcular las estimaciones</string>
     <string name="estimates">Estimaciones</string>
     <string name="retry">Reintentar</string>
 </resources>

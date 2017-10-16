@@ -19,7 +19,7 @@ import com.manuelperera.cabifychallenge.view.view_holder.ErrorSectionViewHolder
 import com.manuelperera.cabifychallenge.view.view_holder.LoadingSectionViewHolder
 import com.manuelperera.cabifychallenge.view.view_holder.RecyclerViewViewHolder
 import com.manuelperera.cabifychallenge.view.widget.EstimateChromeView
-import kotlinx.android.synthetic.main.item_network_error.view.*
+import kotlinx.android.synthetic.main.item_error.view.*
 import javax.inject.Inject
 
 class EstimatesActivityRecyclerAdapter(private val estimatesActivity: EstimatesActivity) : RecyclerView.Adapter<RecyclerViewViewHolder<Estimate>>(), EstimatesActivityRecyclerAdapterView {
@@ -45,7 +45,7 @@ class EstimatesActivityRecyclerAdapter(private val estimatesActivity: EstimatesA
             when (viewType) {
                 RecyclerViewAdapterItem.Type.ITEM.ordinal -> EstimateViewHolder(EstimateChromeView(parent!!.context), estimatesActivityRecyclerAdapterPresenter)
                 RecyclerViewAdapterItem.Type.LOADING.ordinal -> LoadingSectionViewHolder((parent!!.inflate(R.layout.item_loading)))
-                else -> ErrorSectionViewHolder((parent!!.inflate(R.layout.item_network_error)), { view ->
+                else -> ErrorSectionViewHolder((parent!!.inflate(R.layout.item_error)), { view ->
                     estimatesActivityRecyclerAdapterPresenter.bindReloadDataObservable(view.networkErrorRetryButton.asObservable())
                 })
             }

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_no_internet"
+        android:src="@drawable/ic_error"
         tools:ignore="ContentDescription" />
 
     <com.manuelperera.cabifychallenge.view.widget.TypefaceTextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="@string/network_error"
+        android:text="@string/calculate_estimates_error"
         android:textSize="15sp"
         app:fontName="Open_Sans_Regular" />
 

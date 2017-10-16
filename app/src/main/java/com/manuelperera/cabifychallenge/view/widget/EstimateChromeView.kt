@@ -19,7 +19,6 @@ class EstimateChromeView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     fun setCategoryChrome(estimate: Estimate) {
-//        this.cardBackgroundColor = ContextCompat.getColor(context, R.color.gray)
         estimateIconImageView.loadUrl(estimate.vehicleType.icons.regular, R.drawable.ic_taxi_purple)
 
         estimateVehicleShortNameTextView.text = estimate.vehicleType.shortName

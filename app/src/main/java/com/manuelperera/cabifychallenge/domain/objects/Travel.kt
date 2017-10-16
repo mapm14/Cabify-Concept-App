@@ -2,9 +2,9 @@ package com.manuelperera.cabifychallenge.domain.objects
 
 import com.google.gson.annotations.SerializedName
 
-class Travel(val stops: List<Stop>,
-             @SerializedName("start_at")
-             val startAt: String?) {
+open class Travel(val stops: List<Stop>,
+                  @SerializedName("start_at")
+                  val startAt: String?) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -2,7 +2,7 @@ package com.manuelperera.cabifychallenge.domain.objects
 
 import com.google.gson.annotations.SerializedName
 
-class Stop(
+open class Stop(
         @SerializedName("loc")
         val location: List<Double>,
         val name: String,

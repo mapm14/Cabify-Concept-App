@@ -28,7 +28,7 @@ class MapsActivityPresenter(private val setTravelUseCase: SetTravelUseCase) : Pr
         bindMapCalculateEstimatesButton()
     }
 
-    private fun setTravelAngGetEstimates() {
+    private fun setTravel() {
         if (getStops() != null)
             addSubscription(setTravelUseCase.bind(SetTravelUseCase.Params(Travel(getStops()!!, null))).doOnComplete {
                 view.routeToEstimates()
@@ -80,13 +80,15 @@ class MapsActivityPresenter(private val setTravelUseCase: SetTravelUseCase) : Pr
             when (id) {
                 MapsActivity.POINT_A -> {
                     stopA = Stop(listOf(latLng.latitude, latLng.longitude), thoroughfare, address, knownName, city, country, "instructions", Contact("Manuel", "+34", "000111"))
-                    view.addMarkerOnMap(latLng, MapsActivity.POINT_A, context.getString(R.string.start_point), moveCamera)
-                    view.setStreetAddressName(address, MapsActivity.POINT_A)
+                    addSubscription(view.setStreetAddressName(address, MapsActivity.POINT_A).doOnComplete {
+                        view.addMarkerOnMap(latLng, MapsActivity.POINT_A, context.getString(R.string.start_point), moveCamera)
+                    }.subscribe())
                 }
                 MapsActivity.POINT_B -> {
                     stopB = Stop(listOf(latLng.latitude, latLng.longitude), thoroughfare, address, knownName, city, country, "instructions", Contact("Nelly", "+58", "111999"))
-                    view.addMarkerOnMap(latLng, MapsActivity.POINT_B, context.getString(R.string.end_point), moveCamera)
-                    view.setStreetAddressName(address, MapsActivity.POINT_B)
+                    addSubscription(view.setStreetAddressName(address, MapsActivity.POINT_B).doOnComplete {
+                        view.addMarkerOnMap(latLng, MapsActivity.POINT_B, context.getString(R.string.end_point), moveCamera)
+                    }.subscribe())
                 }
             }
         } catch (e: Exception) {
@@ -132,7 +134,7 @@ class MapsActivityPresenter(private val setTravelUseCase: SetTravelUseCase) : Pr
 
     private fun bindMapCalculateEstimatesButton() {
         addSubscription(view.getMapCalculateEstimatesButton().bind().subscribe {
-            setTravelAngGetEstimates()
+            setTravel()
         })
     }
 

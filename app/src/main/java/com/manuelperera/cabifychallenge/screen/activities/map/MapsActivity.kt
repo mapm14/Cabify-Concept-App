@@ -39,6 +39,7 @@ import com.manuelperera.cabifychallenge.extensions.hideKeyboard
 import com.manuelperera.cabifychallenge.extensions.routeToEstimatesActivity
 import com.manuelperera.cabifychallenge.screen.activities.map.injection.DaggerMapsActivityComponent
 import es.dmoral.toasty.Toasty
+import io.reactivex.Completable
 import kotlinx.android.synthetic.main.activity_maps.*
 import javax.inject.Inject
 
@@ -198,20 +199,21 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         }
     }
 
-    override fun setStreetAddressName(strAddress: String, id: String) {
-        when (id) {
-            POINT_A -> {
-                mapSearchPointAEditText.setText(strAddress)
-                mapSearchPointAEditText.setSelection(mapSearchPointAEditText.text.length)
-                mapSearchPointAEditText.isEnabled = false
+    override fun setStreetAddressName(strAddress: String, id: String): Completable =
+            Completable.create {
+                when (id) {
+                    POINT_A -> {
+                        mapSearchPointAEditText.setText(strAddress)
+                        mapSearchPointAEditText.setSelection(mapSearchPointAEditText.text.length)
+                        it.onComplete()
+                    }
+                    POINT_B -> {
+                        mapSearchPointBEditText.setText(strAddress)
+                        mapSearchPointBEditText.setSelection(mapSearchPointBEditText.text.length)
+                        it.onComplete()
+                    }
+                }
             }
-            POINT_B -> {
-                mapSearchPointBEditText.setText(strAddress)
-                mapSearchPointBEditText.setSelection(mapSearchPointBEditText.text.length)
-                mapSearchPointBEditText.isEnabled = false
-            }
-        }
-    }
 
     override fun getMapSearchPointAClearButton(): PresenterClicker<ImageView> = PresenterClicker(mapSearchPointAClearImageView)
 
@@ -225,7 +227,6 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     override fun clearMapSearchEditText(editText: EditText) {
         editText.setText("")
-        editText.isEnabled = true
     }
 
     override fun removeMarker(id: String) {
@@ -244,6 +245,11 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                     mapSearchPointAClearImageView.visibility = View.VISIBLE
                 else if (charSequence.isEmpty() && mapSearchPointAClearImageView.visibility == View.VISIBLE)
                     mapSearchPointAClearImageView.visibility = View.GONE
+
+                if (hashMapMarkers[POINT_A] != null) {
+                    hashMapMarkers[POINT_A]?.remove()
+                    hashMapMarkers.remove(POINT_A)
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -266,6 +272,11 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                     mapSearchPointBClearImageView.visibility = View.VISIBLE
                 else if (charSequence.isEmpty() && mapSearchPointBClearImageView.visibility == View.VISIBLE)
                     mapSearchPointBClearImageView.visibility = View.GONE
+
+                if (hashMapMarkers[POINT_B] != null) {
+                    hashMapMarkers[POINT_B]?.remove()
+                    hashMapMarkers.remove(POINT_B)
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {}

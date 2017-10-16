@@ -7,10 +7,10 @@ import com.manuelperera.cabifychallenge.domain.objects.Estimate
 import com.manuelperera.cabifychallenge.domain.objects.Travel
 import io.reactivex.Observable
 
-class EstimateApiRepository<E : Estimate>(private val estimateApiClient: EstimateApiClient<E>,
-                                          private val estimateTransactionRequestFactory: TransactionRequestFactory<E>) {
+open class EstimateApiRepository<E : Estimate>(private val estimateApiClient: EstimateApiClient<E>,
+                                               private val estimateTransactionRequestFactory: TransactionRequestFactory<E>) {
 
-    fun getEstimates(travel: Travel): Observable<Transaction<List<E>>> =
+    open fun getEstimates(travel: Travel): Observable<Transaction<List<E>>> =
             estimateTransactionRequestFactory.createTransactionRequest().modifyObservableList(estimateApiClient.getEstimates(travel))
 
 }
