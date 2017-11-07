@@ -41,7 +41,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun estimateApiClient(client: OkHttpClient): EstimateApiClient<Estimate> {
+    fun estimateApiClient(client: OkHttpClient): EstimateApiClient {
         return EstimateApiClientImpl(Retrofit.Builder()
                 .baseUrl("https://test.cabify.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

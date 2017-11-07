@@ -8,12 +8,14 @@ import android.view.MenuItem
 import co.develoop.androidcleanarchitecture.screen.presenter.recyclerview.RecyclerViewAdapterItem
 import com.manuelperera.cabifychallenge.R
 import com.manuelperera.cabifychallenge.extensions.transitionDownAnimation
+import com.manuelperera.cabifychallenge.extensions.transitionUpAnimation
 import com.manuelperera.cabifychallenge.screen.activities.estimates.section.EstimatesActivityRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_estimates.*
 
 class EstimatesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        transitionUpAnimation()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_estimates)
         setToolbar()

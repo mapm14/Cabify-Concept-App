@@ -23,7 +23,7 @@ class CabifyChallengeApp : Application() {
                 .setErrorColor(ContextCompat.getColor(this, R.color.colorPrimaryLight))
                 .setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
                 .tintIcon(true)
-                .setToastTypeface(Fonts.values()[0].getTypeface(this)!!)
+                .setToastTypeface(Fonts.REGULAR.getTypeface(this)!!)
                 .apply()
 //                .setInfoColor(@ColorInt int infoColor) // optional
 //                .setSuccessColor(@ColorInt int successColor) // optional

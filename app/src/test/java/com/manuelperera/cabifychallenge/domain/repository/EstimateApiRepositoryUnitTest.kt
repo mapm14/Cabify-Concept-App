@@ -5,8 +5,7 @@ import co.develoop.androidcleanarchitecture.client.transaction.TransactionStatus
 import com.manuelperera.cabifychallenge.client.api_client.EstimateApiClient
 import com.manuelperera.cabifychallenge.client.transaction.TransactionRequest
 import com.manuelperera.cabifychallenge.client.transaction.TransactionRequestFactory
-import com.manuelperera.cabifychallenge.domain.objects.Estimate
-import com.manuelperera.cabifychallenge.domain.objects.Travel
+import com.manuelperera.cabifychallenge.domain.objects.*
 import com.manuelperera.cabifychallenge.domain.repository.api.EstimateApiRepository
 import com.manuelperera.cabifychallenge.domain.repository.cache.EstimateCacheRepository
 import com.nhaarman.mockito_kotlin.any
@@ -24,20 +23,21 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class EstimateApiRepositoryUnitTest {
 
-    private val travel = mock<Travel>()
+    private val travel: Travel = Travel(listOf(Stop(listOf(0.0, 0.0), "Carrefour La Latina", "C. Calatrava", "18", "Madrid", "Spain", "", Contact("Manuel", "+34", "000555111")),
+            Stop(listOf(1.0, 2.0), "Carrefour La Latina", "C. Calatrava", "18", "Madrid", "Spain", "", Contact("Manuel", "+34", "000555111"))), "")
 
-    @Mock
+    @Mock private
     lateinit var transactionRequest: TransactionRequest<Estimate>
 
-    @Mock
+    @Mock private
     lateinit var transactionRequestFactory: TransactionRequestFactory<Estimate>
 
-    @Mock
-    lateinit var estimateApiClient: EstimateApiClient<Estimate>
+    @Mock private
+    lateinit var estimateApiClient: EstimateApiClient
 
-    private lateinit var estimateApiRepository: EstimateApiRepository<Estimate>
+    private lateinit var estimateApiRepository: EstimateApiRepository
 
-    private lateinit var estimateCacheRepository: EstimateCacheRepository<Estimate>
+    private lateinit var estimateCacheRepository: EstimateCacheRepository
 
     @Before
     fun setUp() {
@@ -52,7 +52,8 @@ class EstimateApiRepositoryUnitTest {
 
     @Test
     fun getEstimatesFromApiWithSuccess() {
-        val estimatesData = arrayListOf(mock<Estimate>(), mock())
+        val estimatesData: List<Estimate> = listOf(Estimate(VehicleType("1", "Premium Lux", "Premium", "Luxury car", Icons(""), "icon", Eta(0, 10, true, "")), 100, "100,00 €", "EUR", "€"),
+                Estimate(VehicleType("2", "Premium Lux", "Premium", "Luxury car", Icons(""), "icon", Eta(0, 10, true, "")), 100, "100,00 €", "EUR", "€"))
 
         whenever(estimateApiClient.getEstimates(travel)).doReturn(Observable.create { observer ->
             observer.onNext(estimatesData)

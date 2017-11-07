@@ -9,10 +9,10 @@ import com.manuelperera.cabifychallenge.domain.repository.cache.EstimateCacheRep
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
-open class EstimateModel<E : Estimate>(private val estimateApiRepository: EstimateApiRepository<E>,
-                                       private val estimateCacheRepository: EstimateCacheRepository<E>) {
+open class EstimateModel(private val estimateApiRepository: EstimateApiRepository,
+                         private val estimateCacheRepository: EstimateCacheRepository) {
 
-    open fun getEstimates(travel: Travel): Observable<Transaction<List<E>>> =
+    open fun getEstimates(travel: Travel): Observable<Transaction<List<Estimate>>> =
             estimateCacheRepository.getEstimate(travel)
                     .concatWith(estimateApiRepository.getEstimates(travel).doOnNext { transaction ->
                         if (transaction.isSuccess)

@@ -3,7 +3,7 @@ package com.manuelperera.cabifychallenge.view
 import android.content.Context
 import android.graphics.Typeface
 
-enum class Fonts(val fontName: String) {
+enum class Fonts(private val fontName: String) {
 
     REGULAR("fonts/OpenSans-Regular.ttf"),
     SEMI_BOLD("fonts/OpenSans-Semibold.ttf"),

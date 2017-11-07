@@ -7,7 +7,7 @@ import com.manuelperera.cabifychallenge.domain.objects.Travel
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-open class EstimateService<E : Estimate>(private val estimateModel: EstimateModel<E>) {
+open class EstimateService(private val estimateModel: EstimateModel) {
 
     lateinit var mTravel: Travel
 
@@ -17,7 +17,7 @@ open class EstimateService<E : Estimate>(private val estimateModel: EstimateMode
                 it.onComplete()
             }
 
-    open fun getEstimates(): Observable<Transaction<List<E>>> =
+    open fun getEstimates(): Observable<Transaction<List<Estimate>>> =
             estimateModel.getEstimates(mTravel)
 
 }

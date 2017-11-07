@@ -3,7 +3,7 @@ package com.manuelperera.cabifychallenge.domain.objects
 import co.develoop.androidcleanarchitecture.screen.presenter.recyclerview.RecyclerViewAdapterItem
 import com.google.gson.annotations.SerializedName
 
-open class Estimate(@SerializedName("vehicle_type")
+class Estimate(@SerializedName("vehicle_type")
                     val vehicleType: VehicleType,
                     @SerializedName("total_price")
                     val totalPrice: Int,

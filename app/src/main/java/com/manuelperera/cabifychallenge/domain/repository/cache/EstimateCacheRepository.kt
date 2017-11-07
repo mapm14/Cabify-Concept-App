@@ -7,12 +7,12 @@ import com.manuelperera.cabifychallenge.domain.objects.Travel
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-open class EstimateCacheRepository<E : Estimate> {
+open class EstimateCacheRepository {
 
-    private var mEstimatesList: List<E>? = null
+    private var mEstimatesList: List<Estimate>? = null
     private var mTravel: Travel? = null
 
-    fun getEstimate(travel: Travel): Observable<Transaction<List<E>>> =
+    fun getEstimate(travel: Travel): Observable<Transaction<List<Estimate>>> =
             Observable.create { consumer ->
                 mEstimatesList?.let { estimatesList ->
                     if (mTravel == travel)
@@ -22,7 +22,7 @@ open class EstimateCacheRepository<E : Estimate> {
             }
 
 
-    fun cacheEstimatesList(estimatesList: List<E>, travel: Travel): Completable =
+    fun cacheEstimatesList(estimatesList: List<Estimate>, travel: Travel): Completable =
             Completable.create { consumer ->
                 mEstimatesList = estimatesList
                 mTravel = travel

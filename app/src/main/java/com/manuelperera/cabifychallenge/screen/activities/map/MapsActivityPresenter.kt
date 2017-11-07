@@ -1,12 +1,12 @@
 package com.manuelperera.cabifychallenge.screen.activities.map
 
+import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.util.Log
 import co.develoop.androidcleanarchitecture.screen.presenter.Presenter
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.manuelperera.cabifychallenge.CabifyChallengeApp
 import com.manuelperera.cabifychallenge.R
 import com.manuelperera.cabifychallenge.domain.objects.Contact
 import com.manuelperera.cabifychallenge.domain.objects.Stop
@@ -14,10 +14,10 @@ import com.manuelperera.cabifychallenge.domain.objects.Travel
 import com.manuelperera.cabifychallenge.usecase.estimate.SetTravelUseCase
 import java.util.*
 
-class MapsActivityPresenter(private val setTravelUseCase: SetTravelUseCase) : Presenter<MapsActivityPresenterView>() {
+class MapsActivityPresenter(private val setTravelUseCase: SetTravelUseCase,
+                            private val context: Context) : Presenter<MapsActivityPresenterView>() {
 
     private val MAP_ACTIVITY_PRESENTER_TAG = "MAP_ACTIVITY_PRESENTER"
-    private val context = CabifyChallengeApp.mDaggerAppComponent.provideContext()
 
     private var stopA: Stop? = null
     private var stopB: Stop? = null

@@ -8,7 +8,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class GetEstimatesUseCase(private val estimateService: EstimateService<Estimate>) : UseCase<Observable<Transaction<List<Estimate>>>> {
+class GetEstimatesUseCase(private val estimateService: EstimateService) : UseCase<Observable<Transaction<List<Estimate>>>> {
 
     override fun bind(): Observable<Transaction<List<Estimate>>> =
             estimateService.getEstimates().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

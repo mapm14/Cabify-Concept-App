@@ -12,7 +12,7 @@ class BusinessServiceModule {
 
     @Provides
     @Singleton
-    fun estimateService(estimateModel: EstimateModel<Estimate>): EstimateService<Estimate> =
+    fun estimateService(estimateModel: EstimateModel): EstimateService =
             EstimateService(estimateModel)
 
 }

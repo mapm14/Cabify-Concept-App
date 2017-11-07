@@ -2,7 +2,6 @@ package com.manuelperera.cabifychallenge.injection.module.domain.model
 
 import com.manuelperera.cabifychallenge.domain.model.EstimateModel
 import com.manuelperera.cabifychallenge.domain.repository.api.EstimateApiRepository
-import com.manuelperera.cabifychallenge.domain.objects.Estimate
 import com.manuelperera.cabifychallenge.domain.repository.cache.EstimateCacheRepository
 import dagger.Module
 import dagger.Provides
@@ -13,8 +12,8 @@ class ModelModule {
 
     @Provides
     @Singleton
-    fun estimateModel(estimateApiRepository: EstimateApiRepository<Estimate>,
-                      estimateCacheRepository: EstimateCacheRepository<Estimate>): EstimateModel<Estimate> =
+    fun estimateModel(estimateApiRepository: EstimateApiRepository,
+                      estimateCacheRepository: EstimateCacheRepository): EstimateModel =
             EstimateModel(estimateApiRepository, estimateCacheRepository)
 
 }

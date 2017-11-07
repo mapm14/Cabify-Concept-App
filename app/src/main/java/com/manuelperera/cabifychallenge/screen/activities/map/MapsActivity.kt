@@ -1,6 +1,7 @@
 package com.manuelperera.cabifychallenge.screen.activities.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -76,11 +77,11 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         MapsInitializer.initialize(application)
         mapView.getMapAsync(this)
 
-        initRxLocationListenerObservable()
+        initGoogleApiClient()
         configMapSearchEditText()
     }
 
-    private fun initRxLocationListenerObservable() {
+    private fun initGoogleApiClient() {
         googleApiClient = GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -120,6 +121,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun setMyLocationEnabled() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ReactivePermission.Builder(this)
@@ -152,6 +154,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(madridLatLng, 5.2f))
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLastKnownUserLocation(): Location? {
         val locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
